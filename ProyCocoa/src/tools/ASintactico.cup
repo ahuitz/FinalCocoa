@@ -35,6 +35,7 @@ clase ::= CLASE:c NOMCLASE:nc tab_list PROPIEDADES:p {:
             System.out.println(nc.getCadena());         
             System.out.println(tabs_counter);
             System.out.println(p.getCadena());                     
+            
         :};
 
 tab_list ::= TAB {: tabs_counter++; :} tab_list 

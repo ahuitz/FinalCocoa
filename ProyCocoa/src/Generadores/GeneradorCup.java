@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tools;
+package Generadores;
 
 import java.io.File;
 import java.io.IOException;

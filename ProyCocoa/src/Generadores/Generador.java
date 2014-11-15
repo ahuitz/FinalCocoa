@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 
-package tools;
+package Generadores;
+
+import JFlex.SilentExit;
+import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Rosario
  */
-public class ProyCocoa {
+public class Generador {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        JFlex.Main.generate(new File("src\\tools\\ALexico.flex"));
     }
-    
 }
+    
+
