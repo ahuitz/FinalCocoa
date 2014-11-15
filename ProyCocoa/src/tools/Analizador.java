@@ -160,8 +160,13 @@ class CUP$Analizador$actions {
 		
             System.out.println(c.getCadena());
             System.out.println(nc.getCadena());         
-            System.out.println(tabs_counter);
+            if(tabs_counter==1){
+                System.out.println(tabs_counter);
+            }else{
+//                syntax_error(sym.ERROR);
+            }            
             System.out.println(p.getCadena());                     
+            
         
               CUP$Analizador$result = parser.getSymbolFactory().newSymbol("clase",0, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
             }
@@ -171,7 +176,9 @@ class CUP$Analizador$actions {
           case 2: // NT$0 ::= 
             {
               Object RESULT =null;
- tabs_counter++; 
+
+                    tabs_counter++; 
+                
               CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$0",2, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
             }
           return CUP$Analizador$result;
@@ -191,7 +198,9 @@ class CUP$Analizador$actions {
           case 4: // tab_list ::= TAB 
             {
               Object RESULT =null;
-		 tabs_counter++; 
+		
+                     tabs_counter++; 
+            
               CUP$Analizador$result = parser.getSymbolFactory().newSymbol("tab_list",1, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
             }
           return CUP$Analizador$result;

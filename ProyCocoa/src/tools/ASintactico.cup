@@ -33,11 +33,19 @@ start with clase;
 clase ::= CLASE:c NOMCLASE:nc tab_list PROPIEDADES:p {:
             System.out.println(c.getCadena());
             System.out.println(nc.getCadena());         
-            System.out.println(tabs_counter);
+            if(tabs_couunter==1){
+                System.out.println(tabs_counter);
+            }else{
+                syntax_error(ERROR);
+            }            
             System.out.println(p.getCadena());                     
             
         :};
 
-tab_list ::= TAB {: tabs_counter++; :} tab_list 
-            | TAB {: tabs_counter++; :};
+tab_list ::= TAB {:
+                    tabs_counter++; 
+                :} tab_list 
+            | TAB {:
+                     tabs_counter++; 
+            :};
 

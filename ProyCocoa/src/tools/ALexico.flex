@@ -22,7 +22,7 @@ nomClase = [A-Z]+{variables}
 comillas="\"" {entradaC}*{finL}? "\""
 lineaTerminal = [\r|\n|\r|\n]
 espacioBlanco = {lineaTerminal}|[ \t\f]
-finlinea = [\n^]
+//finlinea = [\n^]
 
 %eofval{
   System.out.println("Fin de archivo encontrado");
@@ -104,7 +104,7 @@ finlinea = [\n^]
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     
-{Tabulator} {return new Symbol(sym.TAB, new token(yyline, true, "TAB", yytext())); }
+{Tabulator} {return new Symbol(sym.TAB, new token(yyline,"TAB",true, yytext())); }
 
 
 [ \r\n\f] { }
@@ -112,7 +112,7 @@ finlinea = [\n^]
 ({comentarioB})+ {/*ignore*/}
 ({comentarioA})+ {/*ignore*/}
 {espacioBlanco} {/*ignore*/}
-{finlinea} {return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}
+//{finlinea} {return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}
 . {yyclose(); 
     System.err.println("Caracter Invalido" + yytext() + "["+ yyline + "]");
     return new Symbol(sym.ERROR);}

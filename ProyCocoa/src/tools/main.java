@@ -22,7 +22,7 @@ public class main {
         try {
             Lexico lex = new Lexico(new FileReader("src/cocoarduino/prueba.txt"));
             Analizador parser = new Analizador(lex);
-            parser.parse();            
+            parser.parse();                           
         }catch (java.lang.Exception el){
             System.out.println("error encontrado" + el.getMessage());
         }
