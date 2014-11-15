@@ -50,8 +50,8 @@ finlinea = [\n^]
         "decimal" {return new Symbol(sym.DECIMAL, new token(yyline,"RESERVADA", yytext()));}
         "metodos" {return new Symbol(sym.METODOS, new token(yyline,"RESERVADA", yytext()));}   
 
-{flotante}      {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext()));}
-{entero}+       {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext()));}
+{flotante}      {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext(),true));}
+{entero}+       {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext(),false));}
 
 /*Palabras Reservadas*/
 {and}           {return new Symbol(sym.AND, new token(yyline,"RESERVADA", yytext()));}
@@ -104,7 +104,7 @@ finlinea = [\n^]
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     
-{Tabulator} {return new Symbol(sym.TAB, new token(yyline, "TAB", yytext(), true)); }
+{Tabulator} {return new Symbol(sym.TAB, new token(yyline, true, "TAB", yytext())); }
 
 
 [ \r\n\f] { }

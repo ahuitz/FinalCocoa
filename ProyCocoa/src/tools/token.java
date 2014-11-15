@@ -11,13 +11,11 @@ package tools;
  * @author Rosario
  */
 public class token {
-    private int fila;
-    //private String identificador; // o simbolo (sym) terminal
+    private int fila;    
     private String cadena;
     private int entero;
     private float decimal;
-    private String identificador;
-    private String cadenas;
+    private String identificador;    
     private boolean tab;
 
     /**
@@ -29,10 +27,10 @@ public class token {
      *                   asume que es un flotante/decimal
      * @param identificador alamacena si que tipo de token es "variable","reservada" etc
      */
-    public token(int fila, String identificador, String cadena, boolean esEntero, String cadenas) {
+    public token(int fila, String identificador, String cadena, boolean esEntero) {
         this.fila = fila;        
-        this.cadena = cadena;
-        this.cadenas=cadenas;
+        this.identificador=identificador;
+        this.cadena = cadena;                
         if(esEntero){
             this.entero = Integer.parseInt(cadena);
         }else{
@@ -41,7 +39,7 @@ public class token {
     }   
 
     /**
-     * 
+     * constructor para almacenar las cadenas 
      * @param fila numero de fila en la que se encuentra el caracter almacenado
      * @param cadena texto encontrado por el analizador lexico
      */
@@ -50,13 +48,20 @@ public class token {
         this.identificador=identificador;
         this.cadena = cadena;
     }
-    
-    public token(int fila,String identificador, String cadena,boolean tab) {
+    /**
+     * constructor para almacenar la informacion del tabulador
+     * @param fila
+     * @param identificador
+     * @param tab
+     * @param cadena 
+     */
+    public token(int fila,String identificador,boolean tab, String cadena) {
         this.fila = fila;
         this.identificador=identificador;
         this.cadena = cadena;
         this.tab=tab;        
     }
+    
     public String getIdentificador() {
         return identificador;
     }
@@ -95,18 +100,6 @@ public class token {
 
     public void setDecimal(float decimal) {
         this.decimal = decimal;
-    }
-
-    public token(String cadenas) {
-        this.cadenas = cadenas;
-    }
-
-    public String getCadenas() {
-        return cadenas;
-    }
-
-    public void setCadenas(String cadenas) {
-        this.cadenas = cadenas;
     }
 
     public boolean isTab() {

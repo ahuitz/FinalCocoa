@@ -40,3 +40,4 @@ clase ::= CLASE:c NOMCLASE:nc tab_list PROPIEDADES:p {:
 
 tab_list ::= TAB {: tabs_counter++; :} tab_list 
             | TAB {: tabs_counter++; :};
+
