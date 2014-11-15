@@ -22,7 +22,8 @@ nomClase = [A-Z]+{variables}
 comillas="\"" {entradaC}*{finL}? "\""
 lineaTerminal = [\r|\n|\r|\n]
 espacioBlanco = {lineaTerminal}|[ \t\f]
-//finlinea = [\n^]
+finlinea = [\n^]
+
 %eofval{
   System.out.println("Fin de archivo encontrado");
   return new Symbol(sym.EOF);
@@ -37,7 +38,7 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
 
 
 
-//{finlinea} {return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}
+
 "propiedades" {return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
 
 
@@ -99,22 +100,19 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
 "["             {return new Symbol(sym.CA, new token(yyline,"ESPECIALES", yytext()));}
 "]"             {return new Symbol(sym.CC, new token(yyline,"ESPECIALES", yytext()));}
 
-/*COMENTARIOS*/
-({comentarioB})+ {/*ignore*/}
-({comentarioA})+ {/*ignore*/}
-{espacioBlanco} {/*ignore*/}
-/*ESPACIOS*/
- //   ("  ") {return new Symbol(sym.DOSESPACIOS, new token(yyline,"DOSESPACIOS", yytext())); }
- //   (" ") {return new Symbol(sym.UNESPACIO, new token(yyline,"UNESPACIO", yytext())); }
 {lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext())); }
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     
 {Tabulator} {return new Symbol(sym.TAB, new token(yyline, "TAB", yytext(), true)); }
 
-/*FIN DE LINEA*/
 
 [ \r\n\f] { }
+/*COMENTARIOS*/
+({comentarioB})+ {/*ignore*/}
+({comentarioA})+ {/*ignore*/}
+{espacioBlanco} {/*ignore*/}
+{finlinea} {return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}
 . {yyclose(); 
     System.err.println("Caracter Invalido" + yytext() + "["+ yyline + "]");
     return new Symbol(sym.ERROR);}
