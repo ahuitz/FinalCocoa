@@ -5,16 +5,18 @@ import java.util.ArrayList;
 
 action code {:
     private int tabs_counter=0;
+
 :}
 
 parser code {:    
+
     @Override
     public void syntax_error(Symbol sy) {
         token t=(token)sy.value;
         done_parsing();
-        report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);
-        
+        report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
     }
+
 :}
 
 terminal token CLASE, NOMCLASE, PROPIEDADES, METODOS, TAB;
@@ -23,7 +25,7 @@ terminal ENTONCES, ESCRIBIR, EXTIENDE, FALSO, HACER, INCREMENTAR;
 terminal LEER, MIENTRAS, NULO, SINO, SI, RETORNAR, OR, VERDADERO;
 terminal VARIABLE, MMAS, MMENOS, SUMA, RESTA, MULTIPLICACION, MODULO;
 terminal IIGUAL, IGUAL, DIAGONAL, MAYORQUE, MENORQUE, DIFERENCIA, OPCION;
-terminal PCOMA, PUNTO, PA, PC, COMA, CA, CC, CADENAS, ERROR, FNLINEA, INDENT;
+terminal token PCOMA, PUNTO, PA, PC, COMA, CA, CC, CADENAS, ERROR, FNLINEA, INDENT;
 terminal ENTERO;
 
 non terminal clase, tab_list;
@@ -33,11 +35,7 @@ start with clase;
 clase ::= CLASE:c NOMCLASE:nc tab_list PROPIEDADES:p {:
             System.out.println(c.getCadena());
             System.out.println(nc.getCadena());         
-            if(tabs_couunter==1){
-                System.out.println(tabs_counter);
-            }else{
-                syntax_error(ERROR);
-            }            
+            
             System.out.println(p.getCadena());                     
             
         :};

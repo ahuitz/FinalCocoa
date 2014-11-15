@@ -93,13 +93,14 @@ public class Analizador extends java_cup.runtime.lr_parser {
 
 
     
+
     @Override
     public void syntax_error(Symbol sy) {
         token t=(token)sy.value;
         done_parsing();
-        report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);
-        
+        report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
     }
+
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -108,6 +109,7 @@ class CUP$Analizador$actions {
 
 
     private int tabs_counter=0;
+
 
   private final Analizador parser;
 
@@ -160,11 +162,7 @@ class CUP$Analizador$actions {
 		
             System.out.println(c.getCadena());
             System.out.println(nc.getCadena());         
-            if(tabs_counter==1){
-                System.out.println(tabs_counter);
-            }else{
-//                syntax_error(sym.ERROR);
-            }            
+            
             System.out.println(p.getCadena());                     
             
         

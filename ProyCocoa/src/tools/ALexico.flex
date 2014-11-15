@@ -100,7 +100,8 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
 "["             {return new Symbol(sym.CA, new token(yyline,"ESPECIALES", yytext()));}
 "]"             {return new Symbol(sym.CC, new token(yyline,"ESPECIALES", yytext()));}
 
-{lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext())); }
+//{lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext())); }
+{lineaTerminal} { }
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
     
