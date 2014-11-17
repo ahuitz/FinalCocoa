@@ -33,9 +33,84 @@ non terminal tipoN;
 non terminal com, var_sim;
 non terminal tab_prop;
 non terminal var_cad, comS, bolCad, tipoS, new_prop, comS2;
+non terminal TipoM, conMetodo, clase, metod;
+non terminal param, comP, varTip, metod_tab;
+non terminal frag_met,  frag_prop;
 
-start with tab_prop;
+start with clase;
 
+clase ::= CLASE:c NOMCLASE:n {:
+            System.out.println(c.getCadena());
+            System.out.println(n.getCadena());
+        :} frag_prop VARIABLE{:
+                System.out.println("SEGMENTO DE METODOS");
+        :} frag_met;
+/*valida todo el segmento de propiedades*/
+frag_prop ::= tabs_list PROPIEDADES:p {:
+                if(tabs_counter!=1){
+                    token t=(token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+                    done_parsing();
+                    report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
+                }
+                System.out.println(p.getCadena());
+                tabs_counter=0;
+            :} tab_prop  ;
+
+/*valida todo el segmento de los metodos*/
+frag_met ::= tabs_list METODOS:m {:
+                if(tabs_counter!=1){
+                    token t=(token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+                    done_parsing();
+                    report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
+                }
+                System.out.println(m.getCadena());
+                tabs_counter=0;
+            :} metod_tab;
+
+/* valida la indentacion de los metodos */
+metod_tab ::= tabs_list {:
+                if(tabs_counter!=2){
+                    token t=(token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+                    done_parsing();
+                    report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
+                }                
+            :} metod;
+/* declaracion de metodos, crea confusion con los parametos para un metodo teminal
+    por lo que la gramatica solo permite q termine en un metodo sin parametros*/
+metod ::= varTip VARIABLE:v PA:pa {:
+            System.out.println(v.getCadena());
+            System.out.println(pa.getCadena());
+        :} param PC:pc {:
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+        :} metod_tab
+        | varTip VARIABLE:v PA:pa PC:pc {:
+            System.out.println(v.getCadena());
+            System.out.println(pa.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+        :} metod_tab 
+        | varTip VARIABLE:v PA:pa PC:pc {:
+            System.out.println(v.getCadena());
+            System.out.println(pa.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+        :}
+        ;
+
+
+/*parametros que reciben los metodos*/
+param ::= varTip VARIABLE:v COMA:c{:
+            System.out.println(v.getCadena());
+            System.out.println(c.getCadena());
+        :} param
+        | varTip VARIABLE:v {:
+            System.out.println(v.getCadena());
+        :}; 
+    
+varTip ::= tipoN | tipoS;
+
+/*trabaja la parde de indentacion para la declaracion de las variables (propiedades)*/
 tab_prop ::= tabs_list {:
                 if(tabs_counter!=2){
                     token t=(token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
@@ -44,9 +119,11 @@ tab_prop ::= tabs_list {:
                 }                
             :} new_prop;
 
-new_prop ::= var_cad | var_sim;
+/*para ver que tipo es (cadena|boleano)
+ o (entero|decimal )*/
+new_prop ::= var_cad | var_sim ;
 
-/*declaracion de variables */
+/*declaracion de variables de tipo entero y decimal */
 var_sim ::= tipoN:e
         VARIABLE:v 
         PCOMA:pc {:
@@ -69,7 +146,7 @@ var_sim ::= tipoN:e
             System.out.println(v.getCadena());
             System.out.println(pc.getCadena());
             tabs_counter=0;
-            :}
+            :} 
         ;
 
 tipoN ::= ENTERO:e {:
@@ -101,14 +178,17 @@ com ::= IGUAL:i NUMERO:n COMA:c VARIABLE:v {:
             System.out.println(c.getCadena());
             System.out.println(v.getCadena());:}
         ;
-
+/*lleva el conteo de los tabuladores, que nos sirven
+para el manejo de la indentacion */
 tabs_list ::= TAB {:
                     tabs_counter++; 
                 :} tabs_list 
             | TAB {:
                      tabs_counter++; 
             :};
-
+/*declaracion de variables de tipo cadena o boleanas
+  no acepta tadas la posibilidades debido a que las reglas,
+    jcup indica conflicto (por lo que han sido ignoradas)  */
 var_cad ::= tipoS:e
         VARIABLE:v 
         PCOMA:pc {:

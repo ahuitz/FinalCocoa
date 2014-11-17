@@ -1,7 +1,8 @@
-        cadena a="algo",b,c;
-        cadena b,e;
-        entero e=32, a=6, a, d;
-        boleano c;
-        boleano e;
-        decimal a, t, e=0;
+clase Impar
+    propiedades
         entero a;
+        cadena b,c,e="algo",b,d;
+        entero a;
+bla
+    metodos
+        entero inicio ()
