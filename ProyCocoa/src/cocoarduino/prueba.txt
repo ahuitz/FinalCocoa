@@ -1,5 +1,4 @@
-si a%3 entonces
+hacer
+escribir "c";
 escribir "hola";
-sino
-devolver 0;
-   
+mientras b<10;

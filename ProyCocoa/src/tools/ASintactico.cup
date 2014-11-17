@@ -38,9 +38,11 @@ non terminal param, comP, varTip, metod_tab;
 non terminal frag_met,  frag_prop;
 non terminal escrib, lee;
 non terminal val, devolv;
-non terminal condic, cond1, op, ssi,conten;
+non terminal condic, cond1, op, ssi,conten, contMet;
+non terminal opFor, inFor, desd;
+non terminal haceer;
 
-start with ssi;
+start with haceer;
 
 clase ::= CLASE:c NOMCLASE:n {:
             System.out.println(c.getCadena());
@@ -86,19 +88,19 @@ metod ::= varTip VARIABLE:v PA:pa {:
         :} param PC:pc {:
             System.out.println(pc.getCadena());
             tabs_counter=0;
-        :} metod_tab
+        :} contMet metod_tab
         | varTip VARIABLE:v PA:pa PC:pc {:
             System.out.println(v.getCadena());
             System.out.println(pa.getCadena());
             System.out.println(pc.getCadena());
             tabs_counter=0;
-        :} metod_tab 
+        :} contMet metod_tab 
         | varTip VARIABLE:v PA:pa PC:pc {:
             System.out.println(v.getCadena());
             System.out.println(pa.getCadena());
-            System.out.println(pc.getCadena());
+            System.out.println(pc.getCadena());            
             tabs_counter=0;
-        :}
+        :} 
         ;
 
 
@@ -274,6 +276,16 @@ escrib ::= ESCRIBIR:e CADENAS:c PCOMA:p {:
             System.out.println(cm.getCadena());
             System.out.println(v.getCadena());
             System.out.println(p.getCadena());
+        :} escrib
+        | ESCRIBIR:e VARIABLE:v PCOMA:p {:
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(p.getCadena());
+        :} 
+        | ESCRIBIR:e VARIABLE:v PCOMA:p {:
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(p.getCadena());
         :} escrib;
 
 lee ::= LEER:l VARIABLE:v PCOMA:p {:
@@ -300,14 +312,14 @@ val ::= NUMERO:n {:
         :}| VARIABLE:v {:
             System.out.println(v.getCadena());
         :};
-
+contMet ::= ssi| conten;
 ssi ::= SI:s {:
             System.out.println(s.getCadena());
         :} condic ENTONCES:e {:
             System.out.println(e.getCadena());
         :} conten SINO conten;
 
-conten ::= escrib| lee | devolv;
+conten ::= escrib| lee | devolv ;
 
 /*condicion del if*/
 condic ::= cond1 op cond1;
@@ -329,4 +341,33 @@ op ::= MAYORQUE:ma{:
             System.out.println(d.getCadena());
         :}| MODULO:m{:
             System.out.println(m.getCadena());
+        :};
+desd ::= DESDE:d {:
+            System.out.println(d.getCadena());
+        :} inFor MIENTRAS:m {:
+            System.out.println(m.getCadena());
+        :} inFor INCREMENTAR:i NUMERO:n HACER:h {:
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());
+            System.out.println(h.getCadena());
+        :} conten;
+
+inFor ::= VARIABLE:v opFor NUMERO:n {:
+            System.out.println(v.getCadena());            
+            System.out.println(n.getCadena());
+        :};
+opFor ::= IGUAL:i {:
+            System.out.println(i.getCadena());
+        :}| MENORQUE:ma {:
+            System.out.println(ma.getCadena());
+        :}| MAYORQUE:me {:
+            System.out.println(me.getCadena());
+        :};
+
+haceer ::= HACER:h {:
+            System.out.println(h.getCadena());
+        :} conten MIENTRAS:m {:
+            System.out.println(m.getCadena());
+        :} inFor PCOMA:p {:
+            System.out.println(p.getCadena());
         :};
