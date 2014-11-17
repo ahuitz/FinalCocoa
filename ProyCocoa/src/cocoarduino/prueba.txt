@@ -1,8 +1,5 @@
-clase Impar
-    propiedades
-        entero a;
-        cadena b,c,e="algo",b,d;
-        entero a;
-bla
-    metodos
-        entero inicio ()
+si a%3 entonces
+escribir "hola";
+sino
+devolver 0;
+   

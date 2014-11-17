@@ -36,13 +36,16 @@ non terminal var_cad, comS, bolCad, tipoS, new_prop, comS2;
 non terminal TipoM, conMetodo, clase, metod;
 non terminal param, comP, varTip, metod_tab;
 non terminal frag_met,  frag_prop;
+non terminal escrib, lee;
+non terminal val, devolv;
+non terminal condic, cond1, op, ssi,conten;
 
-start with clase;
+start with ssi;
 
 clase ::= CLASE:c NOMCLASE:n {:
             System.out.println(c.getCadena());
             System.out.println(n.getCadena());
-        :} frag_prop VARIABLE{:
+        :} frag_prop METODOS{:
                 System.out.println("SEGMENTO DE METODOS");
         :} frag_met;
 /*valida todo el segmento de propiedades*/
@@ -247,4 +250,83 @@ bolCad ::= CADENAS:c {:
             :}
         | NULO:n {:
             System.out.println(n.getCadena());
+        :};
+escrib ::= ESCRIBIR:e CADENAS:c PCOMA:p {:
+            System.out.println(e.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(p.getCadena());
+        :} escrib
+        | ESCRIBIR:e CADENAS:c PCOMA:p {:
+            System.out.println(e.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(p.getCadena());
+        :}
+        | ESCRIBIR:e CADENAS:c COMA:cm VARIABLE:v PCOMA:p {:
+            System.out.println(e.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(cm.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(p.getCadena());
+        :}
+        | ESCRIBIR:e CADENAS:c COMA:cm VARIABLE:v PCOMA:p {:
+            System.out.println(e.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(cm.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(p.getCadena());
+        :} escrib;
+
+lee ::= LEER:l VARIABLE:v PCOMA:p {:
+            System.out.println(l.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(p.getCadena());
+        :} lee
+        | LEER:l VARIABLE:v PCOMA:p {:
+            System.out.println(l.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(p.getCadena());
+        :};
+
+devolv ::= DEVOLVER:d {:
+            System.out.println(d.getCadena());
+        :} val PCOMA:pc {:
+            System.out.println(pc.getCadena());
+        :} ;
+
+val ::= NUMERO:n {:
+            System.out.println(n.getCadena());
+        :} | CADENAS:c {:
+            System.out.println(c.getCadena());
+        :}| VARIABLE:v {:
+            System.out.println(v.getCadena());
+        :};
+
+ssi ::= SI:s {:
+            System.out.println(s.getCadena());
+        :} condic ENTONCES:e {:
+            System.out.println(e.getCadena());
+        :} conten SINO conten;
+
+conten ::= escrib| lee | devolv;
+
+/*condicion del if*/
+condic ::= cond1 op cond1;
+
+cond1 ::= NUMERO:n {:
+            System.out.println(n.getCadena());
+        :} | VARIABLE:v {:
+            System.out.println(v.getCadena());
+        :}| CADENAS:c {:
+            System.out.println(c.getCadena());
+        :};
+op ::= MAYORQUE:ma{:
+            System.out.println(ma.getCadena());
+        :}| MENORQUE:me {:
+            System.out.println(me.getCadena());
+        :}| IIGUAL:i {:
+            System.out.println(i.getCadena());
+        :}| DIFERENCIA:d {:
+            System.out.println(d.getCadena());
+        :}| MODULO:m{:
+            System.out.println(m.getCadena());
         :};
