@@ -19,6 +19,7 @@ public class sym {
   public static final int DESDE = 12;
   public static final int ENTONCES = 14;
   public static final int PA = 44;
+  public static final int FLOT = 54;
   public static final int INCREMENTAR = 19;
   public static final int CADENAS = 49;
   public static final int AND = 11;
@@ -116,7 +117,8 @@ public class sym {
   "ERROR",
   "FNLINEA",
   "INDENT",
-  "ENTERO"
+  "ENTERO",
+  "FLOT"
   };
 }
 

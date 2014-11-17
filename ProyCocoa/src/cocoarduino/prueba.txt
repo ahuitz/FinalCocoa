@@ -1,3 +1,7 @@
-            entero bd=4;
-        entero a, b=2;
-        entero j=3;
+        cadena a="algo",b,c;
+        cadena b,e;
+        entero e=32, a=6, a, d;
+        boleano c;
+        boleano e;
+        decimal a, t, e=0;
+        entero a;

@@ -9,7 +9,7 @@ import java_cup.runtime.Symbol;
 Tabulator = [\t] | [ ]{4}
 entero= [0-9]
 exponente=["x10""X10"eE]
-flotante={entero}[\.]{entero}+{exponente}[0-9]+
+flotante={entero}[\.]{entero}+
 variables=[a-zA-Z]+[0-9]*
 //Espacio=[ \t\r\n]
 and=[a][n][d]|[A][N][D]
@@ -44,7 +44,7 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
         "decimal" {return new Symbol(sym.DECIMAL, new token(yyline,"RESERVADA", yytext()));}
         "metodos" {return new Symbol(sym.METODOS, new token(yyline,"RESERVADA", yytext()));}   
 
-{flotante}      {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext(),true));}
+{flotante}      {return new Symbol(sym.FLOT, new token(yyline,"NUMERO", yytext(),true));}
 {entero}+       {return new Symbol(sym.NUMERO, new token(yyline,"NUMERO", yytext(),false));}
 
 /*Palabras Reservadas*/

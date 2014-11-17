@@ -26,12 +26,13 @@ terminal token LEER, MIENTRAS, NULO, SINO, SI, RETORNAR, OR, VERDADERO;
 terminal token VARIABLE, MMAS, MMENOS, SUMA, RESTA, MULTIPLICACION, MODULO;
 terminal token IIGUAL, IGUAL, DIAGONAL, MAYORQUE, MENORQUE, DIFERENCIA, OPCION;
 terminal token PCOMA, PUNTO, PA, PC, COMA, CA, CC, CADENAS, ERROR, FNLINEA, INDENT;
-terminal token ENTERO;
+terminal token ENTERO, FLOT;
 
-non terminal clase, tabs_list, prop, ini, iniS, iniB, cadenas;
-non terminal tipoN, binario;
-non terminal tip, com, var_sim, var_rec, rec,var;
+non terminal tabs_list;
+non terminal tipoN;
+non terminal com, var_sim;
 non terminal tab_prop;
+non terminal var_cad, comS, bolCad, tipoS, new_prop, comS2;
 
 start with tab_prop;
 
@@ -41,35 +42,41 @@ tab_prop ::= tabs_list {:
                     done_parsing();
                     report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
                 }                
-            :} var_sim;
+            :} new_prop;
+
+new_prop ::= var_cad | var_sim;
 
 /*declaracion de variables */
-var_sim ::= ENTERO:e
+var_sim ::= tipoN:e
         VARIABLE:v 
         PCOMA:pc {:
-            System.out.println(e.getCadena());
+            //System.out.println(e.getCadena());
             System.out.println(v.getCadena());
             System.out.println(pc.getCadena());
             tabs_counter=0;
             :} tab_prop
-        | ENTERO:e VARIABLE:v {:
-            System.out.println(e.getCadena());
+        | tipoN:e VARIABLE:v {:
+            //System.out.println(e.getCadena());
             System.out.println(v.getCadena());
         :}com PCOMA:pc {:                        
             System.out.println(pc.getCadena());
             tabs_counter=0;
         :} tab_prop
-        | ENTERO:e
+        | tipoN:e
         VARIABLE:v
         PCOMA:pc {:
-            System.out.println(e.getCadena());
+            //System.out.println(e.getCadena());
             System.out.println(v.getCadena());
             System.out.println(pc.getCadena());
             tabs_counter=0;
-            :} 
-            
-            ;
+            :}
+        ;
 
+tipoN ::= ENTERO:e {:
+            System.out.println(e.getCadena());
+        :} | DECIMAL:d {:
+            System.out.println(d.getCadena());
+        :};
 
 com ::= IGUAL:i NUMERO:n COMA:c VARIABLE:v {:
             System.out.println(i.getCadena());
@@ -90,7 +97,7 @@ com ::= IGUAL:i NUMERO:n COMA:c VARIABLE:v {:
         | IGUAL:i NUMERO:n {:
             System.out.println(i.getCadena());
             System.out.println(n.getCadena());:}
-        |COMA:c VARIABLE:v {:
+        | COMA:c VARIABLE:v {:
             System.out.println(c.getCadena());
             System.out.println(v.getCadena());:}
         ;
@@ -101,3 +108,63 @@ tabs_list ::= TAB {:
             | TAB {:
                      tabs_counter++; 
             :};
+
+var_cad ::= tipoS:e
+        VARIABLE:v 
+        PCOMA:pc {:
+            //System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+            :} tab_prop
+        | tipoS:e VARIABLE:v {:
+            //System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+        :}comS PCOMA:pc {:                        
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+        :} tab_prop
+        | tipoS:e
+        VARIABLE:v
+        PCOMA:pc {:
+            //System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+            :}
+        ;
+
+tipoS ::= CADENA:e {:
+            System.out.println(e.getCadena());
+        :} | BOLEANO:d {:
+            System.out.println(d.getCadena());
+        :};
+
+comS ::= IGUAL:i {:
+                System.out.println(i.getCadena());
+            :} bolCad COMA:c VARIABLE:v {:            
+            //System.out.println(n.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        :}comS
+        | COMA:c VARIABLE:v {:
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        :} comS
+        | COMA:c VARIABLE:v {:
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        :}
+        ;
+
+bolCad ::= CADENAS:c {:
+            System.out.println(c.getCadena());
+        :}
+        | VERDADERO:v {:
+            System.out.println(v.getCadena());
+        :}| FALSO:f {:
+            System.out.println(f.getCadena());
+            :}
+        | NULO:n {:
+            System.out.println(n.getCadena());
+        :};
