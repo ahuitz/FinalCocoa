@@ -5,7 +5,7 @@ import java_cup.runtime.Symbol;
 %line
 %cup
 
-//comilla= ["a-zA-Z"]
+
 Tabulator = [\t] | [ ]{4}
 entero= [0-9]
 exponente=["x10""X10"eE]
@@ -35,13 +35,7 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
   
     "clase" {return new Symbol(sym.CLASE, new token(yyline,"RESERVADA", yytext()));}    
     {nomClase} {return new Symbol(sym.NOMCLASE, new token(yyline,"ID", yytext()));}
-
-
-
-
-"propiedades" {return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
-
-
+    "propiedades" {return new Symbol(sym.PROPIEDADES, new token(yyline,"RESERVADA", yytext()));} 
 
     /*RESERVADAS PARA METODOS*/
         "boleano" {return new Symbol(sym.BOLEANO, new token(yyline,"RESERVADA", yytext()));}
@@ -74,7 +68,7 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
 
 
 /*IDENTIFICADORES*/
-{variables}+       {return new Symbol(sym.VARIABLE, new token(yyline,"ID",yytext()));}
+{variables}       {return new Symbol(sym.VARIABLE, new token(yyline,"ID",yytext()));}
 
 /*OPERADORES*/
 "++"            {return new Symbol(sym.MMAS, new token(yyline,"OPERADOR", yytext()));}
@@ -100,7 +94,6 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
 "["             {return new Symbol(sym.CA, new token(yyline,"ESPECIALES", yytext()));}
 "]"             {return new Symbol(sym.CC, new token(yyline,"ESPECIALES", yytext()));}
 
-//{lineaTerminal} {return new Symbol(sym.FNLINEA, new token(yyline,"FNLINEA",yytext())); }
 {lineaTerminal} { }
 /*COMILLAS*/
 ({comillas})+ {return new Symbol(sym.CADENAS, new token(yyline,"CADENAS", yytext()));}
@@ -108,12 +101,13 @@ espacioBlanco = {lineaTerminal}|[ \t\f]
 {Tabulator} {return new Symbol(sym.TAB, new token(yyline,"TAB",true, yytext())); }
 
 
-[ \r\n\f] { }
+
 /*COMENTARIOS*/
 ({comentarioB})+ {/*ignore*/}
 ({comentarioA})+ {/*ignore*/}
 {espacioBlanco} {/*ignore*/}
 //{finlinea} {return new Symbol(sym.INDENT, new token(yyline,"INDENT", yytext()));}
+[ \r\n\f] { }
 . {yyclose(); 
     System.err.println("Caracter Invalido" + yytext() + "["+ yyline + "]");
     return new Symbol(sym.ERROR);}

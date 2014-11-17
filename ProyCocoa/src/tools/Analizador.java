@@ -30,8 +30,13 @@ public class Analizador extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\005\000\002\002\004\000\002\002\006\000\002\004" +
-    "\002\000\002\003\005\000\002\003\003" });
+    "\000\023\000\002\002\004\000\002\022\002\000\002\021" +
+    "\005\000\002\023\002\000\002\015\007\000\002\024\002" +
+    "\000\002\025\002\000\002\015\011\000\002\015\005\000" +
+    "\002\026\002\000\002\014\010\000\002\027\002\000\002" +
+    "\014\006\000\002\014\006\000\002\014\004\000\002\014" +
+    "\004\000\002\030\002\000\002\003\005\000\002\003\003" +
+    "" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -39,11 +44,22 @@ public class Analizador extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\012\000\004\004\005\001\002\000\004\002\014\001" +
-    "\002\000\004\005\006\001\002\000\004\010\007\001\002" +
-    "\000\006\006\ufffd\010\uffff\001\002\000\004\006\011\001" +
-    "\002\000\004\002\000\001\002\000\004\010\007\001\002" +
-    "\000\004\006\ufffe\001\002\000\004\002\001\001\002" });
+    "\000\035\000\004\010\004\001\002\000\006\010\ufff1\067" +
+    "\uffef\001\002\000\004\002\035\001\002\000\004\067\000" +
+    "\001\002\000\004\067\011\001\002\000\004\002\uffff\001" +
+    "\002\000\004\036\012\001\002\000\010\046\ufffc\054\014" +
+    "\060\ufffc\001\002\000\006\046\021\060\017\001\002\000" +
+    "\006\002\ufff9\010\ufffe\001\002\000\004\010\004\001\002" +
+    "\000\004\002\ufffd\001\002\000\004\036\032\001\002\000" +
+    "\004\054\027\001\002\000\004\014\022\001\002\000\006" +
+    "\054\ufff3\060\023\001\002\000\004\036\024\001\002\000" +
+    "\010\046\ufff8\054\ufff4\060\ufff8\001\002\000\006\046\021" +
+    "\060\017\001\002\000\004\054\ufff7\001\002\000\004\010" +
+    "\ufffb\001\002\000\004\010\004\001\002\000\004\002\ufffa" +
+    "\001\002\000\010\046\ufff6\054\ufff2\060\ufff6\001\002\000" +
+    "\006\046\021\060\017\001\002\000\004\054\ufff5\001\002" +
+    "\000\004\002\001\001\002\000\004\010\004\001\002\000" +
+    "\004\067\ufff0\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -51,10 +67,18 @@ public class Analizador extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\012\000\004\002\003\001\001\000\002\001\001\000" +
-    "\002\001\001\000\004\003\007\001\001\000\004\004\011" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\003" +
-    "\012\001\001\000\002\001\001\000\002\001\001" });
+    "\000\035\000\006\003\005\021\004\001\001\000\004\030" +
+    "\035\001\001\000\002\001\001\000\004\022\006\001\001" +
+    "\000\004\015\007\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\024\012\001\001\000\004\014\017\001\001" +
+    "\000\004\023\014\001\001\000\006\003\005\021\015\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\004\026\024\001\001\000\004\014\025\001\001\000\002" +
+    "\001\001\000\004\025\027\001\001\000\006\003\005\021" +
+    "\030\001\001\000\002\001\001\000\004\027\032\001\001" +
+    "\000\004\014\033\001\001\000\002\001\001\000\002\001" +
+    "\001\000\004\003\036\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -133,7 +157,7 @@ class CUP$Analizador$actions {
       switch (CUP$Analizador$act_num)
         {
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 0: // $START ::= clase EOF 
+          case 0: // $START ::= tab_prop EOF 
             {
               Object RESULT =null;
 		int start_valleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
@@ -147,59 +171,330 @@ class CUP$Analizador$actions {
           return CUP$Analizador$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 1: // clase ::= CLASE NOMCLASE tab_list PROPIEDADES 
+          case 1: // NT$0 ::= 
             {
               Object RESULT =null;
-		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
-		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
-		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
-		int ncleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
-		int ncright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
-		token nc = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
-		int pleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
-		int pright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
-		token p = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
-		
-            System.out.println(c.getCadena());
-            System.out.println(nc.getCadena());         
+
+                if(tabs_counter!=2){
+                    token t=(token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+                    done_parsing();
+                    report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
+                }                
             
-            System.out.println(p.getCadena());                     
-            
-        
-              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("clase",0, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$0",16, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
             }
           return CUP$Analizador$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // NT$0 ::= 
-            {
-              Object RESULT =null;
-
-                    tabs_counter++; 
-                
-              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$0",2, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
-            }
-          return CUP$Analizador$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 3: // tab_list ::= TAB NT$0 tab_list 
+          case 2: // tab_prop ::= tabs_list NT$0 var_sim 
             {
               Object RESULT =null;
               // propagate RESULT from NT$0
                 RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
 
-              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("tab_list",1, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("tab_prop",15, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
             }
           return CUP$Analizador$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 4: // tab_list ::= TAB 
+          case 3: // NT$1 ::= 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token e = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int pcleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int pcright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token pc = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+            
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$1",17, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 4: // var_sim ::= ENTERO VARIABLE PCOMA NT$1 tab_prop 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$1
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).right;
+		token e = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
+		int pcleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int pcright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token pc = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("var_sim",11, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 5: // NT$2 ::= 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token e = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+        
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$2",18, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 6: // NT$3 ::= 
+            {
+              Object RESULT =(Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).right;
+		token e = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
+		int pcleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int pcright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token pc = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+                        
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+        
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$3",19, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 7: // var_sim ::= ENTERO VARIABLE NT$2 com PCOMA NT$3 tab_prop 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$3
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-6)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-6)).right;
+		token e = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-6)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)).value;
+		int pcleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int pcright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token pc = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("var_sim",11, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-6)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 8: // var_sim ::= ENTERO VARIABLE PCOMA 
+            {
+              Object RESULT =null;
+		int eleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token e = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int pcleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int pcright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token pc = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+		
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+            
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("var_sim",11, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 9: // NT$4 ::= 
+            {
+              Object RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
+		token i = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token n = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$4",20, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 10: // com ::= IGUAL NUMERO COMA VARIABLE NT$4 com 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$4
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)).right;
+		token i = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).right;
+		token n = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-4)).value;
+		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
+		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("com",10, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-5)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 11: // NT$5 ::= 
+            {
+              Object RESULT =null;
+		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$5",21, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 12: // com ::= COMA VARIABLE NT$5 com 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$5
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
+		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("com",10, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // com ::= IGUAL NUMERO COMA VARIABLE 
+            {
+              Object RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).right;
+		token i = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).right;
+		token n = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)).value;
+		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+		
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("com",10, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-3)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 14: // com ::= IGUAL NUMERO 
+            {
+              Object RESULT =null;
+		int ileft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token i = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int nleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int nright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token n = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+		
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("com",10, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 15: // com ::= COMA VARIABLE 
+            {
+              Object RESULT =null;
+		int cleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).left;
+		int cright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).right;
+		token c = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+		int vleft = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).left;
+		int vright = ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()).right;
+		token v = (token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+		
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("com",10, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 16: // NT$6 ::= 
+            {
+              Object RESULT =null;
+
+                    tabs_counter++; 
+                
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("NT$6",22, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 17: // tabs_list ::= TAB NT$6 tabs_list 
+            {
+              Object RESULT =null;
+              // propagate RESULT from NT$6
+                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Analizador$stack.elementAt(CUP$Analizador$top-1)).value;
+
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("tabs_list",1, ((java_cup.runtime.Symbol)CUP$Analizador$stack.elementAt(CUP$Analizador$top-2)), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+            }
+          return CUP$Analizador$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // tabs_list ::= TAB 
             {
               Object RESULT =null;
 		
                      tabs_counter++; 
             
-              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("tab_list",1, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
+              CUP$Analizador$result = parser.getSymbolFactory().newSymbol("tabs_list",1, ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), ((java_cup.runtime.Symbol)CUP$Analizador$stack.peek()), RESULT);
             }
           return CUP$Analizador$result;
 

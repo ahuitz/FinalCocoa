@@ -20,30 +20,84 @@ parser code {:
 :}
 
 terminal token CLASE, NOMCLASE, PROPIEDADES, METODOS, TAB;
-terminal BOLEANO, CADENA, DECIMAL, NUMERO, AND, DESDE,DEVOLVER;
-terminal ENTONCES, ESCRIBIR, EXTIENDE, FALSO, HACER, INCREMENTAR;
-terminal LEER, MIENTRAS, NULO, SINO, SI, RETORNAR, OR, VERDADERO;
-terminal VARIABLE, MMAS, MMENOS, SUMA, RESTA, MULTIPLICACION, MODULO;
-terminal IIGUAL, IGUAL, DIAGONAL, MAYORQUE, MENORQUE, DIFERENCIA, OPCION;
+terminal token BOLEANO, CADENA, DECIMAL, NUMERO, AND, DESDE,DEVOLVER;
+terminal token ENTONCES, ESCRIBIR, EXTIENDE, FALSO, HACER, INCREMENTAR;
+terminal token LEER, MIENTRAS, NULO, SINO, SI, RETORNAR, OR, VERDADERO;
+terminal token VARIABLE, MMAS, MMENOS, SUMA, RESTA, MULTIPLICACION, MODULO;
+terminal token IIGUAL, IGUAL, DIAGONAL, MAYORQUE, MENORQUE, DIFERENCIA, OPCION;
 terminal token PCOMA, PUNTO, PA, PC, COMA, CA, CC, CADENAS, ERROR, FNLINEA, INDENT;
-terminal ENTERO;
+terminal token ENTERO;
 
-non terminal clase, tab_list;
+non terminal clase, tabs_list, prop, ini, iniS, iniB, cadenas;
+non terminal tipoN, binario;
+non terminal tip, com, var_sim, var_rec, rec,var;
+non terminal tab_prop;
 
-start with clase;
+start with tab_prop;
 
-clase ::= CLASE:c NOMCLASE:nc tab_list PROPIEDADES:p {:
+tab_prop ::= tabs_list {:
+                if(tabs_counter!=2){
+                    token t=(token)((java_cup.runtime.Symbol) CUP$Analizador$stack.peek()).value;
+                    done_parsing();
+                    report_error("Error sintáctico cerca de \""+ t.getCadena()+"\" ["+t.getFila()+"]" ,null);        
+                }                
+            :} var_sim;
+
+/*declaracion de variables */
+var_sim ::= ENTERO:e
+        VARIABLE:v 
+        PCOMA:pc {:
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+            :} tab_prop
+        | ENTERO:e VARIABLE:v {:
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+        :}com PCOMA:pc {:                        
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+        :} tab_prop
+        | ENTERO:e
+        VARIABLE:v
+        PCOMA:pc {:
+            System.out.println(e.getCadena());
+            System.out.println(v.getCadena());
+            System.out.println(pc.getCadena());
+            tabs_counter=0;
+            :} 
+            
+            ;
+
+
+com ::= IGUAL:i NUMERO:n COMA:c VARIABLE:v {:
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());
             System.out.println(c.getCadena());
-            System.out.println(nc.getCadena());         
-            
-            System.out.println(p.getCadena());                     
-            
-        :};
+            System.out.println(v.getCadena());
+        :}com
+        | COMA:c VARIABLE:v {:
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        :} com
+        | IGUAL:i NUMERO:n COMA:c VARIABLE:v {:
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());
+        :}
+        | IGUAL:i NUMERO:n {:
+            System.out.println(i.getCadena());
+            System.out.println(n.getCadena());:}
+        |COMA:c VARIABLE:v {:
+            System.out.println(c.getCadena());
+            System.out.println(v.getCadena());:}
+        ;
 
-tab_list ::= TAB {:
+tabs_list ::= TAB {:
                     tabs_counter++; 
-                :} tab_list 
+                :} tabs_list 
             | TAB {:
                      tabs_counter++; 
             :};
-

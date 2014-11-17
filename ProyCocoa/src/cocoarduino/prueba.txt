@@ -1,2 +1,3 @@
-clase Impar
-    propiedades
+            entero bd=4;
+        entero a, b=2;
+        entero j=3;
